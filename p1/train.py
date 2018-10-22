@@ -1,3 +1,9 @@
+
+# coding: utf-8
+
+# In[1]:
+
+
 import pandas as pd
 import numpy as np
 from sklearn.mixture import GaussianMixture
@@ -8,7 +14,7 @@ import os
 # In[2]:
 
 
-df = pd.read_hdf("D:\Mtech\Sem4\ASR\Project\\train_timit.hdf")
+df = pd.read_hdf("D:\Mtech\Sem4\ASR\Project\Feature\\timit_mfcc_delta_delta.hdf")
 features = np.array(df["features"].tolist())
 label = np.array(df["labels"].tolist())
 df1 = pd.DataFrame(features)
@@ -18,7 +24,7 @@ df.rename(columns={'0_y': 'Label'}, inplace=True)
 print(df.head())
 
 
-# In[4]:
+# In[3]:
 
 
 labels=df.Label.unique()
@@ -34,7 +40,7 @@ os.mkdir('D:\Mtech\Sem4\ASR\Project\Model\\64M_GMM')
 os.mkdir('D:\Mtech\Sem4\ASR\Project\Model\\128M_GMM')
 
 
-# In[6]:
+# In[5]:
 
 
 def train_gmm(x):
@@ -42,7 +48,7 @@ def train_gmm(x):
     global df
     for i in range(1,8):
         array = df.loc[df['Label']==x].iloc[:,:-1]
-        gmm = GaussianMixture(n_components=2**i).fit(array)
+        gmm = GaussianMixture(n_components=2**i,covariance_type='diag').fit(array)
         file = ''.join(['D:\Mtech\Sem4\ASR\Project\Model\\',str(2**i),'M_GMM\\',x,'_', str(2**i) ,'.pkl'])
         print(file)
         with open(file, 'wb') as f:
