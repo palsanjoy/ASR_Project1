@@ -1,3 +1,9 @@
+
+# coding: utf-8
+
+# In[1]:
+
+
 import pandas as pd
 import numpy as np
 from sklearn.mixture import GaussianMixture
@@ -6,10 +12,10 @@ import os
 import glob
 
 
-# In[13]:
+# In[3]:
 
 
-df = pd.read_hdf("D:\Mtech\Sem4\ASR\Project\\test_timit.hdf")
+df = pd.read_hdf("D:\Mtech\Sem4\ASR\Project\Feature\\test_timit_mfcc_delta_delta.hdf")
 features = np.array(df["features"].tolist())
 label = np.array(df["labels"].tolist())
 df1 = pd.DataFrame(features)
@@ -19,7 +25,7 @@ df.rename(columns={'0_y': 'Label'}, inplace=True)
 print(df.head())
 
 
-# In[14]:
+# In[4]:
 
 
 perCt =0
